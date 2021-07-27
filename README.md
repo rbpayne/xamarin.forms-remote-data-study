@@ -1,2 +1,11 @@
 # xamarin.forms-remote-data-study
-A study in working with remote data in a Xamarin.Forms application
+
+This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos in order to study:
+
+- Making remote web service API calls
+  - Building requests using Postman
+- Deserializing data with [Json.NET](https://www.newtonsoft.com/json)
+- Adding resiliency with [Polly](https://github.com/App-vNext/Polly)
+- Caching data with [Akavache](https://github.com/reactiveui/Akavache)
+- Failing gracefully and displaying errors
+- Checking network availability
