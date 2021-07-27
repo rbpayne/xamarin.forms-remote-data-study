@@ -9,3 +9,5 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - Caching data with [Akavache](https://github.com/reactiveui/Akavache)
 - Failing gracefully and displaying errors
 - Checking network availability
+
+This study is based on learnings from [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications).
