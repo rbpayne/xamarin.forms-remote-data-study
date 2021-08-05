@@ -25,7 +25,7 @@ namespace GitHubRepos.Services
             var request = new RestRequest(Method.GET);
 
             var response = client.Execute(request);
-            if (response.IsSuccessful != true)
+            if (!response.IsSuccessful)
             {
                 throw new Exception($"Unable to retrieve repos. API error message: {response.ErrorMessage}");
             }
