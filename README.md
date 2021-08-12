@@ -1,6 +1,6 @@
 # xamarin.forms-remote-data-study
 
-This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos. It is based on learnings from [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications).
+This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos. It is based on learnings from [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications). The GitHub app example is inspired by [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development).
 
 ## Topics Studied
 
