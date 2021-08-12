@@ -5,7 +5,11 @@ using RestSharp;
 
 namespace GitHubRepos.Services
 {
-    public class GitHubService
+    /*
+     * "Client" name taken from https://softwareengineering.stackexchange.com/a/342406/355398.
+     * More good resources: https://softwareengineering.stackexchange.com/a/90032/355398
+     */
+    public class GitHubClient
     {
         /*
          * NOTE: This should not be static if you are using dependency

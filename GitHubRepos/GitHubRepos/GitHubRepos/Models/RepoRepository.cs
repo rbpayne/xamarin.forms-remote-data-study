@@ -12,7 +12,7 @@ namespace GitHubRepos.Models
 
         public void RefreshRepos()
         {
-            var searchItems = GitHubService.SearchRepos().Items;
+            var searchItems = GitHubClient.SearchRepos().Items;
 
             // TODO: There may be another way to handle this
             if (searchItems == null)
