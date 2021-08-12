@@ -12,3 +12,4 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - [ ] Caching data with [Akavache](https://github.com/reactiveui/Akavache)
 - [ ] Failing gracefully and displaying errors
 - [ ] Checking network availability
+
