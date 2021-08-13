@@ -8,22 +8,24 @@ namespace GitHubRepos.Pages
     public partial class ReposPage
     {
         private readonly ReposViewModel reposViewModel;
-        
+
         public ReposPage(ReposViewModel reposViewModel)
         {
             InitializeComponent();
             BindingContext = this.reposViewModel = reposViewModel;
         }
 
-        private void RefreshRepos(object sender, EventArgs e)
+        private async void RefreshRepos(object sender, EventArgs e)
         {
             try
             {
-                reposViewModel.RefreshRepos();
+                await reposViewModel.RefreshRepos();
             }
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
+                await DisplayAlert("Sorry!",
+                    "We're having difficulty communicating with our servers. Please try again later.", "Ok");
             }
         }
 
@@ -33,7 +35,7 @@ namespace GitHubRepos.Pages
             {
                 return;
             }
-            
+
             try
             {
                 Navigation.PushAsync(new RepoDetailPage(repoViewModel));

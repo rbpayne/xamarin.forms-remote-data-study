@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using GitHubRepos.Models;
 
 namespace GitHubRepos.ViewModels
@@ -29,11 +31,20 @@ namespace GitHubRepos.ViewModels
             }
         }
 
-        public async void RefreshRepos()
+        public async Task RefreshRepos()
         {
-            IsRefreshing = true;
-            await _repository.RefreshRepos();
-            IsRefreshing = false;
+            try
+            {
+                IsRefreshing = true;
+                await _repository.RefreshRepos();
+                IsRefreshing = false;
+            }
+            catch (Exception e)
+            {
+                IsRefreshing = false;
+                Debug.WriteLine(e);
+                throw;
+            }
         }
     }
 }

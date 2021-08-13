@@ -9,6 +9,17 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - [x] Deserializing data with [Json.NET](https://www.newtonsoft.com/json)
 - [x] Adding resiliency with [Polly](https://github.com/App-vNext/Polly)
 - [x] Caching data with [Akavache](https://github.com/reactiveui/Akavache)
-- [ ] Handling errors gracefully
+- [x] Handling errors gracefully
 - [ ] Checking network availability
 
+## Notes
+
+### How to Display an Error
+
+To get the app to display an error, set the RestClient baseUrl to a nonexistent url (e.g. https://api.github).
+
+```
+var restClient = new RestClient("https://api.github");
+```
+
+<img src="img/display-error.png" height="640" />

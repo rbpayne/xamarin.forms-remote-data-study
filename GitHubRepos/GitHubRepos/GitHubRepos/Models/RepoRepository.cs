@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace GitHubRepos.Models
         public async Task RefreshRepos()
         {
             GitHubSearchResult? searchResult;
-            
+
             try
             {
                 searchResult = await _cache.GetObject<GitHubSearchResult>(GitHubRepos);
