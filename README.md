@@ -1,18 +1,20 @@
 # xamarin.forms-remote-data-study
 
-This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos. It is based on learnings from [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications). The GitHub app example is inspired by [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development).
+This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos. It is based on learnings from:
+
+1. [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
+2. [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development).
 
 <img src="img/app-screenshot.png" height="820" />
 
 ## Topics Studied
 
-- Making remote web service API calls with [RestSharp](https://restsharp.dev)
-- Creating models for remote data
-- Deserializing data with [Json.NET](https://www.newtonsoft.com/json)
-- Adding resiliency with [Polly](https://github.com/App-vNext/Polly)
-- Caching data with [Akavache](https://github.com/reactiveui/Akavache)
-- Handling errors gracefully
-- Checking network availability
+- Making remote web service calls with [RestSharp](https://restsharp.dev)
+- Creating remote data models and deserializing with [Json.NET](https://www.newtonsoft.com/json)
+- Adding resiliency (request retry logic) with [Polly](https://github.com/App-vNext/Polly)
+- Reducing load time by caching with [Akavache](https://github.com/reactiveui/Akavache)
+- Handling errors gracefully with [alert pop-ups](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups)
+- Checking network availability with [Xamarin.Essentials: Connectivity](https://docs.microsoft.com/en-us/xamarin/essentials/connectivity?tabs=android)
 
 ## Notes
 
