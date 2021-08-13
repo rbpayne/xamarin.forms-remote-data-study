@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using GitHubRepos.Models.Remote;
 using GitHubRepos.Services;
 
 namespace GitHubRepos.Models
@@ -22,20 +20,11 @@ namespace GitHubRepos.Models
 
         public async Task RefreshRepos()
         {
-            GitHubSearchResult searchResult;
+            var searchResult = await _gitHubClient.SearchRepos();
 
-            try
+            if (searchResult?.Items == null)
             {
-                searchResult = await _gitHubClient.SearchRepos();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw new Exception("Unable to get search result from GitHub");
-            }
-
-            if (searchResult.Items == null)
-            {
+                // TODO: Throw an exception and tell the user that we found nothing
                 return;
             }
 

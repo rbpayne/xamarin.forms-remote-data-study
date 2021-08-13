@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace GitHubRepos.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<RepoViewModel> Repos { get; private set; } = new List<RepoViewModel>();
+        public bool IsRefreshing { get; set; }
 
         public ReposViewModel(RepoRepository repository)
         {
@@ -23,11 +25,15 @@ namespace GitHubRepos.ViewModels
         {
             if (e.PropertyName == nameof(_repository.Repos))
             {
-                // Repopulate list of repo view models
                 Repos = _repository.Repos.Select(repo => new RepoViewModel(repo)).ToList();
             }
         }
 
-        public async void RefreshRepos() => await _repository.RefreshRepos();
+        public async void RefreshRepos()
+        {
+            IsRefreshing = true;
+            await _repository.RefreshRepos();
+            IsRefreshing = false;
+        }
     }
 }

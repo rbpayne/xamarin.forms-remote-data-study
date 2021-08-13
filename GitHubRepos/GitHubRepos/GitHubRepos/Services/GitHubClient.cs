@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 using GitHubRepos.Models.Remote;
+using GitHubRepos.Utilities;
 using Newtonsoft.Json;
 using Polly;
 using RestSharp;
@@ -22,28 +23,44 @@ namespace GitHubRepos.Services
             _restClient = restClient;
         }
 
-        public async Task<GitHubSearchResult> SearchRepos()
+        public async Task<GitHubSearchResult?> SearchRepos()
         {
-            var request = new RestRequest("search/repositories");
-            request.AddParameter("q", "xamarin.forms");
-            request.AddParameter("sort", "stars");
-            request.AddParameter("order", "desc");
-
-            var response = await _restClient.ExecuteAsync(request);
-
-            if (!response.IsSuccessful)
+            try
             {
-                throw new Exception($"Unable to retrieve repos. API error message: {response.ErrorMessage}");
+                var request = new RestRequest("search/repositories");
+                request.AddParameter("q", "xamarin.forms");
+                request.AddParameter("sort", "stars");
+                request.AddParameter("order", "desc");
+
+                string jsonResult = string.Empty;
+
+                var responseMessage = await Policy
+                    .Handle<HttpRequestException>(exception =>
+                    {
+                        Debug.WriteLine($"{exception.GetType().Name} : {exception.Message}");
+                        return true;
+                    })
+                    //.CircuitBreakerAsync(exceptionsAllowedBeforeBreaking: 2, durationOfBreak: TimeSpan.FromSeconds(30))
+                    .WaitAndRetryAsync(
+                        5,
+                        retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+                    .ExecuteAsync(async () => await _restClient.ExecuteAsync(request));
+
+                if (!responseMessage.IsSuccessful)
+                {
+                    throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
+                }
+                
+                jsonResult = responseMessage.Content;
+                var searchResult = JsonConvert.DeserializeObject<GitHubSearchResult>(jsonResult);
+
+                return searchResult;
             }
-
-            var searchResult = JsonConvert.DeserializeObject<GitHubSearchResult>(response.Content);
-
-            if (searchResult == null)
+            catch (Exception e)
             {
-                throw new NullReferenceException("Unable to serialize response from API.");
+                Debug.WriteLine($"{e.GetType().Name} : {e.Message}");
+                throw;
             }
-
-            return searchResult;
         }
     }
 }

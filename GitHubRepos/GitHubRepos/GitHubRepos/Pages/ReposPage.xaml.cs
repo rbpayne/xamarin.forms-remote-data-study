@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GitHubRepos.ViewModels;
 using Xamarin.Forms;
 
@@ -14,7 +15,7 @@ namespace GitHubRepos.Pages
             BindingContext = this.reposViewModel = reposViewModel;
         }
 
-        private void LoadRepos(object sender, EventArgs e)
+        private void RefreshRepos(object sender, EventArgs e)
         {
             try
             {
@@ -22,7 +23,7 @@ namespace GitHubRepos.Pages
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                Debug.WriteLine(exception);
             }
         }
 
@@ -39,7 +40,19 @@ namespace GitHubRepos.Pages
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception);
+                Debug.WriteLine(exception);
+            }
+        }
+
+        private void RefreshView_OnRefreshing(object sender, EventArgs e)
+        {
+            try
+            {
+                reposViewModel.RefreshRepos();
+            }
+            catch (Exception exception)
+            {
+                Debug.WriteLine(exception);
             }
         }
     }
