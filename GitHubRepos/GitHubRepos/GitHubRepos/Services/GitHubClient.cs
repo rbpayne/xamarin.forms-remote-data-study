@@ -34,15 +34,21 @@ namespace GitHubRepos.Services
 
                 string jsonResult = string.Empty;
 
+                /*
+                 * Using Polly - https://github.com/App-vNext/Polly
+                 */
                 var responseMessage = await Policy
                     .Handle<HttpRequestException>(exception =>
                     {
                         Debug.WriteLine($"{exception.GetType().Name} : {exception.Message}");
                         return true;
                     })
+                    // After two exceptions have happened, wait 30 seconds before making
+                    // another request to avoid flooding the API with retries 
                     //.CircuitBreakerAsync(exceptionsAllowedBeforeBreaking: 2, durationOfBreak: TimeSpan.FromSeconds(30))
                     .WaitAndRetryAsync(
                         5,
+                        // Wait for two seconds between each retry attempt
                         retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
                     .ExecuteAsync(async () => await _restClient.ExecuteAsync(request));
 
@@ -50,7 +56,7 @@ namespace GitHubRepos.Services
                 {
                     throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
                 }
-                
+
                 jsonResult = responseMessage.Content;
                 var searchResult = JsonConvert.DeserializeObject<GitHubSearchResult>(jsonResult);
 

@@ -4,6 +4,6 @@ namespace GitHubRepos.Models.Remote
 {
     public class GitHubSearchResult
     {
-        public List<Item>? Items { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
     }
 }

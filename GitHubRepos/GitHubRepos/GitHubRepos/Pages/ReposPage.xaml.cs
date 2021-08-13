@@ -43,17 +43,5 @@ namespace GitHubRepos.Pages
                 Debug.WriteLine(exception);
             }
         }
-
-        private void RefreshView_OnRefreshing(object sender, EventArgs e)
-        {
-            try
-            {
-                reposViewModel.RefreshRepos();
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
-        }
     }
 }

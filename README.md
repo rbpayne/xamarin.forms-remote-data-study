@@ -8,7 +8,7 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - [x] Creating models for remote data
 - [x] Deserializing data with [Json.NET](https://www.newtonsoft.com/json)
 - [x] Adding resiliency with [Polly](https://github.com/App-vNext/Polly)
-- [ ] Caching data with [Akavache](https://github.com/reactiveui/Akavache)
-- [ ] Failing gracefully and displaying errors
+- [x] Caching data with [Akavache](https://github.com/reactiveui/Akavache)
+- [ ] Handling errors gracefully
 - [ ] Checking network availability
 

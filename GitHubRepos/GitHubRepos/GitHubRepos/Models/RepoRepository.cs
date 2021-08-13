@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
+using Akavache;
+using GitHubRepos.Models.Remote;
 using GitHubRepos.Services;
 
 namespace GitHubRepos.Models
@@ -9,6 +13,8 @@ namespace GitHubRepos.Models
     public class RepoRepository : INotifyPropertyChanged
     {
         private readonly GitHubClient _gitHubClient;
+        private readonly IBlobCache _cache;
+        private const string GitHubRepos = "GitHubRepos";
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<Repo> Repos { get; private set; } = new List<Repo>();
@@ -16,13 +22,30 @@ namespace GitHubRepos.Models
         public RepoRepository(GitHubClient gitHubClient)
         {
             _gitHubClient = gitHubClient;
+            _cache = BlobCache.LocalMachine;
         }
 
         public async Task RefreshRepos()
         {
-            var searchResult = await _gitHubClient.SearchRepos();
+            GitHubSearchResult? searchResult;
+            
+            try
+            {
+                searchResult = await _cache.GetObject<GitHubSearchResult>(GitHubRepos);
+            }
+            catch (KeyNotFoundException)
+            {
+                searchResult = default;
+            }
 
-            if (searchResult?.Items == null)
+            // If search result is not cached, request data from remote
+            if (searchResult == null)
+            {
+                searchResult = await _gitHubClient.SearchRepos();
+                await _cache.InsertObject(GitHubRepos, searchResult, DateTimeOffset.Now.AddSeconds(10));
+            }
+
+            if (searchResult == null)
             {
                 // TODO: Throw an exception and tell the user that we found nothing
                 return;

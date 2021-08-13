@@ -8,10 +8,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:viewModels="clr-namespace:GitHubRepos.ViewModels;assembly=GitHubRepos"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <RefreshView
-        IsRefreshing="{Binding IsRefreshing}"
-        RefreshColor="Coral"
-        Refreshing="RefreshView_OnRefreshing">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="Coral">
         <ScrollView>
             <StackLayout Padding="16">
                 <Button
