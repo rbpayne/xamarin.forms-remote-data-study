@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using GitHubRepos.ViewModels;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GitHubRepos.Pages
@@ -17,6 +18,14 @@ namespace GitHubRepos.Pages
 
         private async void RefreshRepos(object sender, EventArgs e)
         {
+            var networkAccess = Connectivity.NetworkAccess;
+
+            if (networkAccess != NetworkAccess.Internet)
+            {
+                await DisplayAlert("Sorry!", "Your network is offline. Please try again later.", "Ok");
+                return;
+            }
+
             try
             {
                 await reposViewModel.RefreshRepos();

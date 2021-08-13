@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -48,7 +47,6 @@ namespace GitHubRepos.Models
 
             if (searchResult == null)
             {
-                // TODO: Throw an exception and tell the user that we found nothing
                 return;
             }
 
