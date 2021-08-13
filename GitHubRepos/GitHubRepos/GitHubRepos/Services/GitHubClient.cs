@@ -1,6 +1,10 @@
 using System;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Threading.Tasks;
 using GitHubRepos.Models.Remote;
 using Newtonsoft.Json;
+using Polly;
 using RestSharp;
 
 namespace GitHubRepos.Services
@@ -11,30 +15,29 @@ namespace GitHubRepos.Services
      */
     public class GitHubClient
     {
-        /*
-         * NOTE: This should not be static if you are using dependency
-         * injection. However, it is fine for this illustration.
-         */
-        public static GitHubSearchResult SearchRepos()
-        {
-            /*
-             * Most of this code was generated from Postman
-             * See https://learning.postman.com/docs/sending-requests/generate-code-snippets/ for more info.
-             */
-            var client =
-                new RestClient("https://api.github.com/search/repositories?q=xamarin.forms&sort=stars&order=desc")
-                {
-                    Timeout = -1
-                };
-            var request = new RestRequest(Method.GET);
+        private readonly IRestClient _restClient;
 
-            var response = client.Execute(request);
+        public GitHubClient(IRestClient restClient)
+        {
+            _restClient = restClient;
+        }
+
+        public async Task<GitHubSearchResult> SearchRepos()
+        {
+            var request = new RestRequest("search/repositories");
+            request.AddParameter("q", "xamarin.forms");
+            request.AddParameter("sort", "stars");
+            request.AddParameter("order", "desc");
+
+            var response = await _restClient.ExecuteAsync(request);
+
             if (!response.IsSuccessful)
             {
                 throw new Exception($"Unable to retrieve repos. API error message: {response.ErrorMessage}");
             }
 
             var searchResult = JsonConvert.DeserializeObject<GitHubSearchResult>(response.Content);
+
             if (searchResult == null)
             {
                 throw new NullReferenceException("Unable to serialize response from API.");

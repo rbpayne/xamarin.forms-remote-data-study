@@ -6,21 +6,36 @@ namespace GitHubRepos.Pages
 {
     public partial class ReposPage
     {
+        private readonly ReposViewModel reposViewModel;
+        
         public ReposPage(ReposViewModel reposViewModel)
         {
             InitializeComponent();
-            BindingContext = reposViewModel;
+            BindingContext = this.reposViewModel = reposViewModel;
         }
 
-
-        private void NavigateToRepo(object sender, EventArgs e)
+        private void LoadRepos(object sender, EventArgs e)
         {
             try
             {
-                if (((BindableObject) sender).BindingContext is RepoViewModel repoViewModel)
-                {
-                    Navigation.PushAsync(new RepoDetailPage(repoViewModel));
-                }
+                reposViewModel.RefreshRepos();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        private void NavigateToRepo(object sender, EventArgs e)
+        {
+            if (!(((BindableObject) sender).BindingContext is RepoViewModel repoViewModel))
+            {
+                return;
+            }
+            
+            try
+            {
+                Navigation.PushAsync(new RepoDetailPage(repoViewModel));
             }
             catch (Exception exception)
             {

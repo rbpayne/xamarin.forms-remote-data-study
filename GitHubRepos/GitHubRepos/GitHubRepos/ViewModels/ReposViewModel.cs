@@ -28,6 +28,6 @@ namespace GitHubRepos.ViewModels
             }
         }
 
-        public void RefreshRepos() => _repository.RefreshRepos();
+        public async void RefreshRepos() => await _repository.RefreshRepos();
     }
 }
