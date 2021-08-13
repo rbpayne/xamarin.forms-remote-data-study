@@ -31,6 +31,14 @@ namespace GitHubRepos.ViewModels
             }
         }
 
+        /// <summary>
+        /// NOTE: This MUST have a return type of "Task" and not "void". Otherwise, exceptions will not be caught by
+        /// event that triggered this method and the app will crash.
+        ///
+        /// More resources:
+        ///     - https://stackoverflow.com/a/12144426/11809808
+        ///     - https://docs.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming
+        /// </summary>
         public async Task RefreshRepos()
         {
             try
