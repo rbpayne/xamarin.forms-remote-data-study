@@ -18,7 +18,7 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 
 ## Notes
 
-### How to Display Errors
+### Displaying Errors
 
 #### HTTP Error
 
