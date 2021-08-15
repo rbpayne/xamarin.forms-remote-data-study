@@ -31,7 +31,7 @@ var restClient = new RestClient("https://api.github");
 ```
 
 2. Restart the app
-3. Tap the "LOAD REPOS" button
+3. Tap "LOAD REPOS"
 
 <img src="img/http-error.png" height="820" />
 
