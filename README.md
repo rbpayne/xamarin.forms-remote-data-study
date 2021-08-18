@@ -16,6 +16,10 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - Handling errors gracefully with [alert pop-ups](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups)
 - Checking network availability with [Xamarin.Essentials: Connectivity](https://docs.microsoft.com/en-us/xamarin/essentials/connectivity?tabs=android)
 
+## Architecture Diagram
+
+![](img/architecture-diagram.jpg)
+
 ## Notes
 
 ### Displaying Error Alerts
