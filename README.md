@@ -1,9 +1,11 @@
 # Xamarin.Forms Remote Data Study
 
-This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos. It is based on learnings from:
+This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos.
 
-1. [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
-2. [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development).
+## Inspiration
+
+- [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
+- [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
 
 <img src="img/app-screenshot.png" height="820" />
 
@@ -44,3 +46,8 @@ var restClient = new RestClient("https://api.github");
 To see how the app handles a network offline error, turn on airplane mode and tap "LOAD REPOS".
 
 <img src="img/network-offline.png" height="820" />
+
+## See Also
+
+- [Xamarin.Forms Web Service Tutorial](https://docs.microsoft.com/en-us/xamarin/get-started/tutorials/web-service/?tabs=vswin)
+- [Consume a RESTful web service](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/web-services/rest)
