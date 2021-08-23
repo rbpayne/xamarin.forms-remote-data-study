@@ -2,11 +2,6 @@
 
 This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos.
 
-## Inspiration
-
-- [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
-- [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
-
 <img src="img/app-screenshot.png" max-height="820" />
 
 ## Topics Studied
@@ -49,5 +44,7 @@ To see how the app handles a network offline error, turn on airplane mode and ta
 
 ## See Also
 
+- [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
 - [Xamarin.Forms Web Service Tutorial](https://docs.microsoft.com/en-us/xamarin/get-started/tutorials/web-service/?tabs=vswin)
 - [Consume a RESTful web service](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/web-services/rest)
+- [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
