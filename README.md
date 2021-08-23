@@ -7,7 +7,7 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
 - [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
 
-<img src="img/app-screenshot.png" height="820" />
+<img src="img/app-screenshot.png" max-height="820" />
 
 ## Topics Studied
 
@@ -39,13 +39,13 @@ var restClient = new RestClient("https://api.github");
 2. Restart the app
 3. Tap "LOAD REPOS"
 
-<img src="img/http-error.png" height="820" />
+<img src="img/http-error.png" max-height="820" />
 
 #### Network Offline
 
 To see how the app handles a network offline error, turn on airplane mode and tap "LOAD REPOS".
 
-<img src="img/network-offline.png" height="820" />
+<img src="img/network-offline.png" max-height="820" />
 
 ## See Also
 
