@@ -1,35 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <ContentPage
-    Title="Top Xamarin.Forms GitHub Repos"
-    Visual="Material"
     x:Class="GitHubRepos.Pages.ReposPage"
-    x:DataType="viewModels:ReposViewModel"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:GitHubRepos.Models;assembly=GitHubRepos"
     xmlns:viewModels="clr-namespace:GitHubRepos.ViewModels;assembly=GitHubRepos"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" RefreshColor="Coral">
-        <ScrollView VerticalOptions="FillAndExpand">
-            <StackLayout Padding="16">
-                <Button
-                    Clicked="RefreshRepos"
-                    Margin="0,0,0,8"
-                    Text="Load Repos" />
-                <StackLayout BindableLayout.ItemsSource="{Binding Repos}" Spacing="8">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate x:DataType="viewModels:RepoViewModel">
-                            <StackLayout>
-                                <Frame>
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="NavigateToRepo" />
-                                    </Frame.GestureRecognizers>
-                                    <Label Text="{Binding Name}" />
-                                </Frame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
+    Title="Top Xamarin.Forms GitHub Repos"
+    x:DataType="viewModels:ReposViewModel"
+    Visual="Material">
+    <StackLayout>
+        <Label
+            IsVisible="False"
+            Text="Loading..."
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand">
+            <Label.Triggers>
+                <DataTrigger
+                    Binding="{Binding Status}"
+                    TargetType="Label"
+                    Value="{x:Static models:Status.Loading}">
+                    <Setter Property="IsVisible" Value="true" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+        <ScrollView IsVisible="False" VerticalOptions="FillAndExpand">
+            <StackLayout
+                Padding="16"
+                BindableLayout.ItemsSource="{Binding Repos}"
+                Spacing="8">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:RepoViewModel">
+                        <StackLayout>
+                            <Frame>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="NavigateToRepo" />
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding Name}" />
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
             </StackLayout>
+            <ScrollView.Triggers>
+                <DataTrigger
+                    Binding="{Binding Status}"
+                    TargetType="ScrollView"
+                    Value="{x:Static models:Status.Done}">
+                    <Setter Property="IsVisible" Value="true" />
+                </DataTrigger>
+            </ScrollView.Triggers>
         </ScrollView>
-    </RefreshView>
+    </StackLayout>
 </ContentPage>

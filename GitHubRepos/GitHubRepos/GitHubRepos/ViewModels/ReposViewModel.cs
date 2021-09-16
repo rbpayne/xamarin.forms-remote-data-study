@@ -14,13 +14,14 @@ namespace GitHubRepos.ViewModels
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public List<RepoViewModel> Repos { get; private set; } = new List<RepoViewModel>();
-        public bool IsRefreshing { get; set; }
+        public Status Status { get; set; }
 
         public ReposViewModel(RepoRepository repository)
         {
             _repository = repository;
-
             repository.PropertyChanged += RepositoryOnPropertyChanged;
+
+            RefreshRepos();
         }
 
         private void RepositoryOnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -31,28 +32,14 @@ namespace GitHubRepos.ViewModels
             }
         }
 
-        /// <summary>
-        /// NOTE: This MUST have a return type of "Task" and not "void". Otherwise, exceptions will not be caught by
-        /// event that triggered this method and the app will crash.
-        ///
-        /// More resources:
-        ///     - https://stackoverflow.com/a/12144426/11809808
-        ///     - https://docs.microsoft.com/en-us/archive/msdn-magazine/2013/march/async-await-best-practices-in-asynchronous-programming
-        /// </summary>
-        public async Task RefreshRepos()
+        private void RefreshRepos()
         {
-            try
+            Status = Status.Loading;
+            Task.Run(async () =>
             {
-                IsRefreshing = true;
                 await _repository.RefreshRepos();
-                IsRefreshing = false;
-            }
-            catch (Exception e)
-            {
-                IsRefreshing = false;
-                Debug.WriteLine(e);
-                throw;
-            }
+                Status = Status.Done;
+            });
         }
     }
 }

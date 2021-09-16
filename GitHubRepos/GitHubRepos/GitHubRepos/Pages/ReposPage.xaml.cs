@@ -16,28 +16,6 @@ namespace GitHubRepos.Pages
             BindingContext = this.reposViewModel = reposViewModel;
         }
 
-        private async void RefreshRepos(object sender, EventArgs e)
-        {
-            var networkAccess = Connectivity.NetworkAccess;
-
-            if (networkAccess != NetworkAccess.Internet)
-            {
-                await DisplayAlert("Sorry!", "Your network is offline. Please try again later.", "Ok");
-                return;
-            }
-
-            try
-            {
-                await reposViewModel.RefreshRepos();
-            }
-            catch (Exception exception)
-            {
-                Debug.WriteLine(exception);
-                await DisplayAlert("Sorry!",
-                    "We're having difficulty communicating with our servers. Please try again later.", "Ok");
-            }
-        }
-
         private void NavigateToRepo(object sender, EventArgs e)
         {
             if (!(((BindableObject) sender).BindingContext is RepoViewModel repoViewModel))
