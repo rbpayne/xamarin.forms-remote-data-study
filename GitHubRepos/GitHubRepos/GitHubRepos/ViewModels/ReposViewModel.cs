@@ -37,8 +37,16 @@ namespace GitHubRepos.ViewModels
             Status = Status.Loading;
             Task.Run(async () =>
             {
-                await _repository.RefreshRepos();
-                Status = Status.Done;
+                try
+                {
+                    await _repository.RefreshRepos();
+                    Status = Status.Done;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    Status = Status.Error;
+                }
             });
         }
     }

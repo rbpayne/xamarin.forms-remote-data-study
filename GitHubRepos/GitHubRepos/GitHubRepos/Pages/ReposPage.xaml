@@ -24,6 +24,20 @@
                 </DataTrigger>
             </Label.Triggers>
         </Label>
+        <Label
+            IsVisible="False"
+            Text="🚨 Error! Unable to connect to the network."
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand">
+            <Label.Triggers>
+                <DataTrigger
+                    Binding="{Binding Status}"
+                    TargetType="Label"
+                    Value="{x:Static models:Status.Error}">
+                    <Setter Property="IsVisible" Value="true" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
         <ScrollView IsVisible="False" VerticalOptions="FillAndExpand">
             <StackLayout
                 Padding="16"
