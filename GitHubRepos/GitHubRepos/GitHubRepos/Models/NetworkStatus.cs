@@ -1,6 +1,6 @@
 namespace GitHubRepos.Models
 {
-    public enum Status
+    public enum NetworkStatus
     {
         Loading,
         Done,

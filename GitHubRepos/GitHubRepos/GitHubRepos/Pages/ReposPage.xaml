@@ -9,61 +9,54 @@
     Title="Top Xamarin.Forms GitHub Repos"
     x:DataType="viewModels:ReposViewModel"
     Visual="Material">
-    <StackLayout>
-        <Label
-            IsVisible="False"
-            Text="Loading..."
-            HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand">
-            <Label.Triggers>
-                <DataTrigger
-                    Binding="{Binding Status}"
-                    TargetType="Label"
-                    Value="{x:Static models:Status.Loading}">
-                    <Setter Property="IsVisible" Value="true" />
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
-        <Label
-            IsVisible="False"
-            Text="🚨 Error! Unable to connect to the network."
-            HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand">
-            <Label.Triggers>
-                <DataTrigger
-                    Binding="{Binding Status}"
-                    TargetType="Label"
-                    Value="{x:Static models:Status.Error}">
-                    <Setter Property="IsVisible" Value="true" />
-                </DataTrigger>
-            </Label.Triggers>
-        </Label>
-        <ScrollView IsVisible="False" VerticalOptions="FillAndExpand">
-            <StackLayout
-                Padding="16"
-                BindableLayout.ItemsSource="{Binding Repos}"
-                Spacing="8">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="viewModels:RepoViewModel">
-                        <StackLayout>
-                            <Frame>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="NavigateToRepo" />
-                                </Frame.GestureRecognizers>
-                                <Label Text="{Binding Name}" />
-                            </Frame>
-                        </StackLayout>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+    <RefreshView Command="{Binding RefreshReposCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <StackLayout>
+            <StackLayout IsVisible="False" VerticalOptions="CenterAndExpand">
+                <Label
+                    Margin="0,0,0,8"
+                    IsVisible="True"
+                    Text="🚨 Error! Unable to connect to the network."
+                    HorizontalOptions="Center" />
+                <Button
+                    Clicked="RefreshRepos"
+                    Text="Try again"
+                    HorizontalOptions="Center" />
+                <StackLayout.Triggers>
+                    <DataTrigger
+                        Binding="{Binding NetworkStatus}"
+                        TargetType="StackLayout"
+                        Value="{x:Static models:NetworkStatus.Error}">
+                        <Setter Property="IsVisible" Value="true" />
+                    </DataTrigger>
+                </StackLayout.Triggers>
             </StackLayout>
-            <ScrollView.Triggers>
-                <DataTrigger
-                    Binding="{Binding Status}"
-                    TargetType="ScrollView"
-                    Value="{x:Static models:Status.Done}">
-                    <Setter Property="IsVisible" Value="true" />
-                </DataTrigger>
-            </ScrollView.Triggers>
-        </ScrollView>
-    </StackLayout>
+            <ScrollView IsVisible="False" VerticalOptions="FillAndExpand">
+                <StackLayout
+                    Padding="16"
+                    BindableLayout.ItemsSource="{Binding Repos}"
+                    Spacing="8">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="viewModels:RepoViewModel">
+                            <StackLayout>
+                                <Frame>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="NavigateToRepo" />
+                                    </Frame.GestureRecognizers>
+                                    <Label Text="{Binding Name}" />
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                <ScrollView.Triggers>
+                    <DataTrigger
+                        Binding="{Binding NetworkStatus}"
+                        TargetType="ScrollView"
+                        Value="{x:Static models:NetworkStatus.Done}">
+                        <Setter Property="IsVisible" Value="true" />
+                    </DataTrigger>
+                </ScrollView.Triggers>
+            </ScrollView>
+        </StackLayout>
+    </RefreshView>
 </ContentPage>

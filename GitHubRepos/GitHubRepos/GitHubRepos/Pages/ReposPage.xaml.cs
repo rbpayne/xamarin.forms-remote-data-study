@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using GitHubRepos.ViewModels;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace GitHubRepos.Pages
@@ -29,8 +27,10 @@ namespace GitHubRepos.Pages
             }
             catch (Exception exception)
             {
-                Debug.WriteLine(exception);
+                Console.WriteLine(exception);
             }
         }
+
+        private void RefreshRepos(object sender, EventArgs e) => reposViewModel.RefreshRepos();
     }
 }
