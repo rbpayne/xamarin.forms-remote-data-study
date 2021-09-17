@@ -22,9 +22,15 @@ To simulate a network error, turn on airplane mode on your phone or emulator and
 
 ![](img/network-error.png)
 
+## Notes
+
+### Error handling and messaging
+
+I chose to displaying loading and error states following [Connect to the Internet - Mars Real Estate](https://github.com/udacity/andfun-kotlin-mars-real-estate). However, you could also use [pop-up alerts](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups#display-an-alert) to message errors states to the user.
+
 ## See Also
 
 - [Working with Remote Data in Xamarin.Forms Applications](https://www.pluralsight.com/courses/remote-data-xamarin-forms-applications)
+- [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
 - [Xamarin.Forms Web Service Tutorial](https://docs.microsoft.com/en-us/xamarin/get-started/tutorials/web-service/?tabs=vswin)
 - [Consume a RESTful web service](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/data-cloud/web-services/rest)
-- [Getting Started with Android Development](https://www.pluralsight.com/courses/getting-started-android-development)
