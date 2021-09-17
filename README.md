@@ -1,8 +1,8 @@
 # Xamarin.Forms Remote Data Study
 
-This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos.
+The purpose of the repository is to study remote data integrations in Xamarin.Forms. This repo contains a Xamarin.Forms application that retrieves and displays a list of GitHub repos.
 
-<img src="img/app-screenshot.png" max-height="820" />
+![](img/app-home.png)
 
 ## Topics Studied
 
@@ -10,37 +10,17 @@ This repo contains a Xamarin.Forms application that retrieves and displays a lis
 - Creating remote data models and deserializing with [Json.NET](https://www.newtonsoft.com/json)
 - Adding resiliency (request retry logic) with [Polly](https://github.com/App-vNext/Polly)
 - Reducing load time by caching with [Akavache](https://github.com/reactiveui/Akavache)
-- Handling errors gracefully with [alert pop-ups](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/pop-ups)
-- Checking network availability with [Xamarin.Essentials: Connectivity](https://docs.microsoft.com/en-us/xamarin/essentials/connectivity?tabs=android)
+- Handling network loading, done, and error states
 
 ## Architecture Diagram
 
 ![](img/architecture-diagram.jpg)
 
-## Notes
+## Displaying Error States
 
-### Displaying Error Alerts
+To simulate a network error, turn on airplane mode on your phone or emulator and restart the app.
 
-#### HTTP Error
-
-To see how the app handles an HTTP error:
-
-1. Set the RestClient baseUrl to a nonexistent url (e.g. https://api.github)
-
-```c#
-var restClient = new RestClient("https://api.github");
-```
-
-2. Restart the app
-3. Tap "LOAD REPOS"
-
-<img src="img/http-error.png" max-height="820" />
-
-#### Network Offline
-
-To see how the app handles a network offline error, turn on airplane mode and tap "LOAD REPOS".
-
-<img src="img/network-offline.png" max-height="820" />
+![](img/network-error.png)
 
 ## See Also
 
